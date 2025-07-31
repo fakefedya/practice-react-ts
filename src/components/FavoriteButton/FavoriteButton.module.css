@@ -1,0 +1,28 @@
+.favorite-button {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: var(--primary-color);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.32px;
+	transition: 0.3s opacity ease-in-out;
+	z-index: 2;
+}
+
+.favorite-button.active {
+	color: var(--green-color);
+}
+
+.icon {
+	display: flex;
+	width: 24px;
+	height: 24px;
+	justify-content: center;
+	align-items: center;
+}

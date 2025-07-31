@@ -1,0 +1,68 @@
+.movie-card {
+	padding: 8px 8px 16px 8px;
+	border-radius: 12px;
+	background: rgba(32, 40, 62, 0.8);
+	backdrop-filter: blur(40px);
+	text-decoration: none;
+	opacity: 1;
+	transition: 0.3s opacity ease-in-out;
+	z-index: 1;
+}
+
+.movie-card:hover {
+	opacity: 0.8;
+}
+
+.wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.card-info {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 8px;
+}
+
+.title {
+	color: var(--text-color);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.32px;
+	margin: 0;
+}
+
+.rating {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	display: inline-flex;
+	padding: 4px 8px;
+	align-items: center;
+	gap: 4px;
+	border-radius: 8px;
+	background: var(--Black-65, rgba(0, 0, 0, 0.65));
+	backdrop-filter: blur(4px);
+	color: var(--orange-color);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 24px; /* 150% */
+}
+
+.rating-icon {
+	display: flex;
+	width: 16px;
+	height: 16px;
+	justify-content: center;
+	align-items: center;
+}
+
+.action {
+	z-index: 2;
+}

@@ -1,0 +1,44 @@
+.button {
+	width: fit-content;
+	cursor: pointer;
+	font-family: 'Poppins', sans-serif;
+	display: flex;
+}
+
+.simple {
+	padding: 16px 32px;
+	border-radius: 12px;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 24px;
+	color: var(--text-color);
+	background: var(--primary-color);
+	border: 2px solid var(--primary-color);
+	transition: 0.3s background ease-in-out;
+}
+
+.simple:hover {
+	background: var(--primary-hover-color);
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 32px;
+	align-items: center;
+	outline: none;
+	background: transparent;
+	border: none;
+	color: var(--text-secondary-color);
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0.32px;
+}
+
+.nav:hover {
+	opacity: 0.8;
+}

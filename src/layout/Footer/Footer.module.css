@@ -1,0 +1,11 @@
+.footer {
+	background-color: var(--footer-color);
+}
+
+.footer p {
+	font-style: normal;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 24px;
+	color: var(--text-secondary-color);
+}
