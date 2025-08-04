@@ -1,18 +1,13 @@
 .logo {
 	height: 40px;
 	width: 40px;
-}
-
-.link {
-	height: 100%;
-	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: 0.3s opacity ease-in-out;
 }
 
-.link:hover {
+.logo:hover {
 	opacity: 0.8;
 }
 

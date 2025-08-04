@@ -11,6 +11,7 @@ import Button from '../Button/Button'
 import Input from '../Input/Input'
 import styles from './AuthForm.module.css'
 import { useUser } from '../../hooks/use-user.hook'
+import Heading from '../Heading/Heading'
 
 function AuthForm() {
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
@@ -62,7 +63,7 @@ function AuthForm() {
 	return (
 		<form className={styles.form} onSubmit={authRequest}>
 			<div className={styles.wrapper}>
-				<h1 className={styles.heading}>Вход</h1>
+				<Heading>Вход</Heading>
 				<Input
 					type='text'
 					name='name'

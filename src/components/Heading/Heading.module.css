@@ -1,0 +1,20 @@
+.heading {
+	color: var(--text-color);
+	font-style: normal;
+	font-weight: 600;
+	line-height: 80px;
+	letter-spacing: -1.28px;
+	margin: 0;
+}
+
+.big {
+	font-size: 64px;
+}
+
+.medium {
+	font-size: 48px;
+}
+
+.small {
+	font-size: 32px;
+}

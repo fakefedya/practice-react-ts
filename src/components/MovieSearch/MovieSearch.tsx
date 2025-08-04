@@ -1,4 +1,5 @@
 import Button from '../Button/Button'
+import Heading from '../Heading/Heading'
 import Input from '../Input/Input'
 import Paragraph from '../Paragraph/Paragraph'
 import styles from './MovieSearch.module.css'
@@ -6,7 +7,7 @@ import styles from './MovieSearch.module.css'
 function MovieSearch() {
 	return (
 		<div className={styles['movie-search']}>
-			<h1 className={styles.heading}>Поиск</h1>
+			<Heading>Поиск</Heading>
 			<Paragraph>
 				Введите название фильма, сериала или мультфильма для поиска и добавления
 				в избранное.
