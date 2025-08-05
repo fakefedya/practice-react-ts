@@ -1,7 +1,5 @@
-import Section from '../../components/Section/Section'
-
 function Error() {
-	return <Section>404</Section>
+	return <section>404</section>
 }
 
 export default Error

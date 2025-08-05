@@ -1,7 +1,5 @@
-import Section from '../../components/Section/Section'
-
 function Favorites() {
-	return <Section>Страница избранных фильмов</Section>
+	return <section>Страница избранных фильмов</section>
 }
 
 export default Favorites

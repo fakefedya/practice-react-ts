@@ -1,14 +1,13 @@
-import Section from '../../components/Section/Section'
 import styles from './Footer.module.css'
 
 function Footer() {
 	return (
 		<footer className={styles['footer']}>
-			<Section>
+			<section>
 				<div className={styles['wrapper']}>
 					<p>Копирование запрещено</p>
 				</div>
-			</Section>
+			</section>
 		</footer>
 	)
 }

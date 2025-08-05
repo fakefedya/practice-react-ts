@@ -1,16 +1,15 @@
 import MovieList from '../../components/MovieList/MovieList'
 import MovieSearch from '../../components/MovieSearch/MovieSearch'
-import Section from '../../components/Section/Section'
 
 function Home() {
 	return (
 		<>
-			<Section>
+			<section>
 				<MovieSearch />
-			</Section>
-			<Section>
+			</section>
+			<section>
 				<MovieList />
-			</Section>
+			</section>
 		</>
 	)
 }

@@ -25,3 +25,8 @@ body {
 	background: var(--background-color);
 	font-family: var(--font);
 }
+
+section {
+	height: 100%;
+	padding: 0 120px;
+}
