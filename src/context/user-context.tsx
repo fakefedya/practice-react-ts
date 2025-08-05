@@ -1,8 +1,7 @@
-import { createContext, useReducer, useEffect } from 'react'
+import { createContext, useReducer, useEffect, useMemo, useState } from 'react'
 import type {
 	AuthAction,
 	AuthState,
-	User,
 	UserContextType,
 	UserProviderProps,
 } from './user-context.props'
@@ -15,13 +14,8 @@ const INITIAL_STATE: AuthState = {
 
 function authReducer(state: AuthState, action: AuthAction): AuthState {
 	switch (action.type) {
-		case 'LOAD_FROM_STORAGE': {
-			const savedUsers = localStorage.getItem(LOCALSTORAGE_KEY)
-			if (!savedUsers) return state
-			const parsedUsers: User[] = JSON.parse(savedUsers)
-			return {
-				users: parsedUsers,
-			}
+		case 'LOAD': {
+			return { users: action.payload }
 		}
 		case 'LOGIN': {
 			const trimmedName = action.name.trim()
@@ -41,19 +35,13 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
 							favoriteMovies: [],
 						},
 				  ]
-			localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(updatedUsers))
-			return {
-				users: updatedUsers,
-			}
+			return { users: updatedUsers }
 		}
 		case 'LOGOUT': {
 			const updatedUsers = state.users.map((user) =>
 				user.isLogin ? { ...user, isLogin: false } : user
 			)
-			localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(updatedUsers))
-			return {
-				users: updatedUsers,
-			}
+			return { users: updatedUsers }
 		}
 		case 'ADD_FAVORITE_MOVIE': {
 			const updatedUsers = state.users.map((user) =>
@@ -64,10 +52,7 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
 					  }
 					: user
 			)
-			localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(updatedUsers))
-			return {
-				users: updatedUsers,
-			}
+			return { users: updatedUsers }
 		}
 		default:
 			return state
@@ -79,10 +64,21 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
 	const [state, dispatch] = useReducer(authReducer, INITIAL_STATE)
+	const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
 	useEffect(() => {
-		dispatch({ type: 'LOAD_FROM_STORAGE' })
+		const savedUsers = localStorage.getItem(LOCALSTORAGE_KEY)
+		if (savedUsers) {
+			dispatch({ type: 'LOAD', payload: JSON.parse(savedUsers) })
+		}
+		setIsLoaded(true)
 	}, [])
+
+	useEffect(() => {
+		if (isLoaded) {
+			localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state.users))
+		}
+	}, [state.users, isLoaded])
 
 	const handleLogin = (name: string) => {
 		dispatch({ type: 'LOGIN', name })
@@ -92,7 +88,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 		dispatch({ type: 'LOGOUT' })
 	}
 
-	const activeUser = state.users.find((user) => user.isLogin)
+	const activeUser = useMemo(
+		() => state.users.find((user) => user.isLogin),
+		[state.users]
+	)
 
 	const value: UserContextType = {
 		users: state.users,
