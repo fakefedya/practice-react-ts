@@ -1,17 +1,18 @@
 import MovieList from '../../components/MovieList/MovieList'
-import MovieSearch from '../../components/MovieSearch/MovieSearch'
+import Search from '../../components/Search/Search'
+import { MoviesProvider } from '../../context/movies-context'
 
-function Home() {
+function MovieSearch() {
 	return (
-		<>
+		<MoviesProvider>
 			<section>
-				<MovieSearch />
+				<Search />
 			</section>
 			<section>
 				<MovieList />
 			</section>
-		</>
+		</MoviesProvider>
 	)
 }
 
-export default Home
+export default MovieSearch
