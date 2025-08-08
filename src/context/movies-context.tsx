@@ -8,6 +8,7 @@ import type {
 	MoviesState,
 } from './movies-context.props'
 import { SEARCH_PREFIX } from '../helpers/API'
+import axios, { AxiosError } from 'axios'
 
 const INITIAL_STATE: MoviesState = {
 	movies: [],
@@ -52,12 +53,11 @@ export const MoviesProvider = ({ children }: MoviesProviderProps) => {
 		if (!query.trim()) return
 
 		dispatch({ type: 'FETCH_START' })
+
 		try {
-			const response = await fetch(
+			const { data } = await axios.get(
 				`${SEARCH_PREFIX}?q=${encodeURIComponent(query)}`
 			)
-			if (!response.ok) throw new Error('Ошибка при загрузке фильмов')
-			const data = await response.json()
 			const movies: MovieProps[] = data.description.map(
 				(item: FullMovieProps) => ({
 					id: item['#IMDB_ID'],
@@ -68,10 +68,9 @@ export const MoviesProvider = ({ children }: MoviesProviderProps) => {
 			)
 			dispatch({ type: 'FETCH_SUCCESS', payload: movies })
 		} catch (error) {
-			dispatch({
-				type: 'FETCH_ERROR',
-				payload: error instanceof Error ? error.message : 'Неизвестная ошибка',
-			})
+			const errorMessage =
+				error instanceof AxiosError ? error.message : 'Неизвестная ошибка'
+			dispatch({ type: 'FETCH_ERROR', payload: errorMessage })
 		}
 	}, [])
 
