@@ -1,12 +1,22 @@
-import { useLoaderData } from 'react-router-dom'
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 import Paragraph from '../Paragraph/Paragraph'
-import type { LoaderDataProps } from '../../interfaces/loader.interface'
 
 function Error() {
-	const { error } = useLoaderData() as LoaderDataProps
+	const error = useRouteError()
+
+	if (isRouteErrorResponse(error)) {
+		return (
+			<section>
+				<Paragraph>
+					Ошибка {error.status}: {error.data}
+				</Paragraph>
+			</section>
+		)
+	}
+
 	return (
 		<section>
-			<Paragraph>Ошибка: {error}</Paragraph>
+			<Paragraph>Неизвестная ошибка</Paragraph>
 		</section>
 	)
 }

@@ -5,13 +5,10 @@ import { useLoaderData } from 'react-router-dom'
 import type { LoaderDataProps } from '../../interfaces/loader.interface'
 import { Suspense } from 'react'
 import Loader from '../Loader/Loader'
-import Error from '../Error/Error'
 
 function MovieList() {
-	const { movies, error, isSearchPerformed } =
-		useLoaderData() as LoaderDataProps
+	const { movies, isSearchPerformed } = useLoaderData() as LoaderDataProps
 
-	if (error) return <Error />
 	if (isSearchPerformed && movies.length === 0) return <MoviesNotFound />
 
 	return (

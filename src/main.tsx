@@ -15,6 +15,7 @@ import { UserProvider } from './context/user-context.tsx'
 import axios from 'axios'
 import { SEARCH_PREFIX } from './helpers/API.ts'
 import NotFound from './pages/NotFound/NotFound.tsx'
+import Error from './components/Error/Error.tsx'
 
 const router = createBrowserRouter([
 	{
@@ -31,8 +32,7 @@ const router = createBrowserRouter([
 				loader: async ({ request }) => {
 					const url = new URL(request.url)
 					const query = url.searchParams.get('q') || ''
-					if (!query.trim())
-						return { movies: [], error: null, isSearchPerformed: false }
+					if (!query.trim()) return { movies: [], isSearchPerformed: false }
 
 					try {
 						const { data } = await axios.get(
@@ -41,23 +41,21 @@ const router = createBrowserRouter([
 
 						return {
 							movies: data.description,
-							error: null,
 							isSearchPerformed: true,
 						}
 					} catch (error: unknown) {
-						let message = 'Неизвестная ошибка'
-
 						if (axios.isAxiosError(error)) {
-							message = error.response?.data?.message ?? error.message
+							throw new Response(
+								error.response?.data?.message ?? error.message,
+								{
+									status: error.response?.status || 500,
+								}
+							)
 						}
-
-						return {
-							movies: [],
-							error: message,
-							isSearchPerformed: true,
-						}
+						throw new Response('Неизвестная ошибка', { status: 500 })
 					}
 				},
+				errorElement: <Error />,
 			},
 			{
 				path: '/login',
