@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-function Movie() {
+export function Movie() {
 	const { id } = useParams()
 
 	return <section>Movie ID = {id}</section>

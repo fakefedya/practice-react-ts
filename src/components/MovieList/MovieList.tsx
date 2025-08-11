@@ -1,29 +1,40 @@
 import styles from './MovieList.module.css'
 import MovieCard from '../MovieCard/MovieCard'
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound'
-import { useMovies } from '../../hooks/use-movies.hook'
+import { Await, useLoaderData } from 'react-router-dom'
+import type { LoaderDataProps } from '../../interfaces/loader.interface'
+import { Suspense } from 'react'
 import Loader from '../Loader/Loader'
+import Error from '../../pages/Error/Error'
 
 function MovieList() {
-	const { movies, isLoading, error, isSearchPerformed } = useMovies()
+	const { movies, error, isSearchPerformed } =
+		useLoaderData() as LoaderDataProps
 
-	if (isLoading) return <Loader />
 	if (error) return <div className={styles['error']}>Ошибка: {error}</div>
 	if (!isSearchPerformed) return
-	if (movies.length === 0) return <MoviesNotFound />
 
 	return (
-		<div className={styles['movie-list']}>
-			{movies.map((movie) => (
-				<MovieCard
-					key={movie.id}
-					id={movie.id}
-					title={movie.title}
-					rating={movie.rating || 0}
-					cover={movie.cover}
-				/>
-			))}
-		</div>
+		<Suspense fallback={<Loader />}>
+			<Await resolve={movies} errorElement={<Error />}>
+				{(resolvedMovies) => {
+					if (resolvedMovies.length === 0) return <MoviesNotFound />
+					return (
+						<div className={styles['movie-list']}>
+							{resolvedMovies.map((movie) => (
+								<MovieCard
+									key={movie.id}
+									id={movie.id}
+									title={movie.title}
+									rating={movie.rating || 0}
+									cover={movie.cover}
+								/>
+							))}
+						</div>
+					)
+				}}
+			</Await>
+		</Suspense>
 	)
 }
 

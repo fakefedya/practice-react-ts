@@ -1,14 +1,15 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { useMovies } from '../../hooks/use-movies.hook'
 import Button from '../Button/Button'
 import Heading from '../Heading/Heading'
 import Input from '../Input/Input'
 import Paragraph from '../Paragraph/Paragraph'
 import styles from './Search.module.css'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 function Search() {
-	const [query, setQuery] = useState('')
-	const { fetchMovies } = useMovies()
+	const [searchParams] = useSearchParams()
+	const navigate = useNavigate()
+	const [query, setQuery] = useState(searchParams.get('q') || '')
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setQuery(e.target.value)
@@ -17,7 +18,7 @@ function Search() {
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (query.trim()) {
-			await fetchMovies(query)
+			navigate(`/?q=${encodeURIComponent(query)}`)
 		}
 	}
 
