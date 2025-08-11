@@ -1,8 +1,8 @@
 import type { MovieDetailsProps } from './movie-details.interface'
-import type { MovieProps } from './movie-search.interface'
+import type { APIMovieProps } from './movie-search.interface'
 
 export interface LoaderMovieSearchProps {
-	movies: MovieProps[]
+	movies: APIMovieProps[]
 	error: string | null
 	isSearchPerformed: boolean
 }

@@ -1,4 +1,4 @@
-export interface MovieProps {
+export interface APIMovieProps {
 	'#TITLE': string
 	'#YEAR': number
 	'#IMDB_ID': string
@@ -10,4 +10,11 @@ export interface MovieProps {
 	'#IMG_POSTER': string
 	photo_width: number
 	photo_height: number
+}
+
+export interface MovieProps {
+	id: string
+	title: string
+	rating: number
+	cover: string
 }
