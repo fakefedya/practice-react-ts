@@ -11,11 +11,16 @@ import './index.css'
 import Movie from './pages/Movie/Movie.tsx'
 import Favorites from './pages/Favorites/Favorites.tsx'
 import Error from './pages/Error/Error.tsx'
+import { UserProvider } from './context/user-context.tsx'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Layout />,
+		element: (
+			<UserProvider>
+				<Layout />
+			</UserProvider>
+		),
 		children: [
 			{
 				index: true,
