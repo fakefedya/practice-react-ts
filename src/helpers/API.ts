@@ -1,1 +1,1 @@
-export const SEARCH_PREFIX = 'https://search.imdbot.workers.dev1/'
+export const PREFIX = 'https://search.imdbot.workers.dev/'

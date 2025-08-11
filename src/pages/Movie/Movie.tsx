@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 
 export function Movie() {
-	const { id } = useParams()
+	const { movie } = useLoaderData()
 
-	return <section>Movie ID = {id}</section>
+	return <section>Имя = {movie.name}</section>
 }
 
 export default Movie
