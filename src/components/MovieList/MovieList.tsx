@@ -2,12 +2,13 @@ import styles from './MovieList.module.css'
 import MovieCard from '../MovieCard/MovieCard'
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound'
 import { useLoaderData, useNavigation } from 'react-router-dom'
-import type { LoaderDataProps } from '../../interfaces/loader.interface'
 import Loader from '../Loader/Loader'
 import { useMemo } from 'react'
+import type { LoaderMovieSearchProps } from '../../interfaces/loader.interface'
 
 function MovieList() {
-	const { movies, isSearchPerformed } = useLoaderData() as LoaderDataProps
+	const { movies, isSearchPerformed } =
+		useLoaderData() as LoaderMovieSearchProps
 	const navigation = useNavigation()
 
 	const movieCards = useMemo(() => {

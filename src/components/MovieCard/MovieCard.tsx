@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import FavoriteButton from '../FavoriteButton/FavoriteButton'
 import styles from './MovieCard.module.css'
-import type { MovieProps } from '../../context/movies-context.props'
+import type { MovieProps } from '../../interfaces/movie-search.interface'
 
 function MovieCard({ ...props }: MovieProps) {
 	return (
