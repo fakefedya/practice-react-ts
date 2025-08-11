@@ -1,13 +1,7 @@
+import type { MovieProps } from './movie.interface'
+
 export interface LoaderDataProps {
-	movies: Promise<
-		{
-			id: number
-			title: string
-			year: string
-			rating: number
-			cover: string
-		}[]
-	>
+	movies: MovieProps[]
 	error: string | null
 	isSearchPerformed: boolean
 }

@@ -4,12 +4,8 @@ import Search from '../../components/Search/Search'
 function MovieSearch() {
 	return (
 		<>
-			<section>
-				<Search />
-			</section>
-			<section>
-				<MovieList />
-			</section>
+			<Search />
+			<MovieList />
 		</>
 	)
 }

@@ -23,23 +23,25 @@ function Search() {
 	}
 
 	return (
-		<div className={styles['movie-search']}>
-			<Heading>Поиск</Heading>
-			<Paragraph>
-				Введите название фильма, сериала или мультфильма для поиска и добавления
-				в избранное.
-			</Paragraph>
-			<form className={styles['action-wrapper']} onSubmit={handleSubmit}>
-				<Input
-					id='search'
-					appearance='search'
-					placeholder='Введите название'
-					value={query}
-					onChange={handleChange}
-				/>
-				<Button type='submit'>Искать</Button>
-			</form>
-		</div>
+		<section>
+			<div className={styles['movie-search']}>
+				<Heading>Поиск</Heading>
+				<Paragraph>
+					Введите название фильма, сериала или мультфильма для поиска и
+					добавления в избранное.
+				</Paragraph>
+				<form className={styles['action-wrapper']} onSubmit={handleSubmit}>
+					<Input
+						id='search'
+						appearance='search'
+						placeholder='Введите название'
+						value={query}
+						onChange={handleChange}
+					/>
+					<Button type='submit'>Искать</Button>
+				</form>
+			</div>
+		</section>
 	)
 }
 
