@@ -20,6 +20,7 @@ import { PREFIX } from './helpers/API.ts'
 import NotFound from './pages/NotFound/NotFound.tsx'
 import Error from './components/Error/Error.tsx'
 import Loader from './components/Loader/Loader.tsx'
+import { RequireAuth } from './helpers/RequireAuth.tsx'
 
 const Movie = lazy(() => import('./pages/Movie/Movie.tsx'))
 
@@ -82,7 +83,11 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <MovieSearch />,
+				element: (
+					<RequireAuth>
+						<MovieSearch />
+					</RequireAuth>
+				),
 				loader: movieSearchLoader,
 				errorElement: <Error />,
 			},
@@ -93,16 +98,22 @@ const router = createBrowserRouter([
 			{
 				path: '/movie/:id',
 				element: (
-					<Suspense fallback={<Loader />}>
-						<Movie />
-					</Suspense>
+					<RequireAuth>
+						<Suspense fallback={<Loader />}>
+							<Movie />
+						</Suspense>
+					</RequireAuth>
 				),
 				loader: movieLoader,
 				errorElement: <Error />,
 			},
 			{
 				path: '/favorites',
-				element: <Favorites />,
+				element: (
+					<RequireAuth>
+						<Favorites />
+					</RequireAuth>
+				),
 			},
 			{
 				path: '*',
