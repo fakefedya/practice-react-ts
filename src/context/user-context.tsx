@@ -5,6 +5,7 @@ import type {
 	UserContextType,
 	UserProviderProps,
 } from './user-context.props'
+import { useNavigate } from 'react-router-dom'
 
 const LOCALSTORAGE_KEY: string = 'reactProjectUsers'
 
@@ -65,6 +66,7 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 export const UserProvider = ({ children }: UserProviderProps) => {
 	const [state, dispatch] = useReducer(authReducer, INITIAL_STATE)
 	const [isLoaded, setIsLoaded] = useState<boolean>(false)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const savedUsers = localStorage.getItem(LOCALSTORAGE_KEY)
@@ -84,14 +86,18 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 		dispatch({ type: 'LOGIN', name })
 	}
 
-	const handleLogout = () => {
-		dispatch({ type: 'LOGOUT' })
-	}
-
 	const activeUser = useMemo(
 		() => state.users.find((user) => user.isLogin),
 		[state.users]
 	)
+
+	const handleLogout = () => {
+		dispatch({ type: 'LOGOUT' })
+		if (activeUser) {
+			localStorage.removeItem('authToken')
+			navigate('/login')
+		}
+	}
 
 	const value: UserContextType = {
 		users: state.users,

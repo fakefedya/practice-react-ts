@@ -1,24 +1,37 @@
-import { MOVIE_LIST } from './MovieList.data'
-
 import styles from './MovieList.module.css'
 import MovieCard from '../MovieCard/MovieCard'
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound'
+import { useLoaderData, useNavigation } from 'react-router-dom'
+import Loader from '../Loader/Loader'
+import type { LoaderMovieSearchProps } from '../../interfaces/loader.interface'
 
 function MovieList() {
-	if (MOVIE_LIST.length === 0) return <MoviesNotFound />
+	const { movies, isSearchPerformed } =
+		useLoaderData() as LoaderMovieSearchProps
+	const navigation = useNavigation()
+
+	if (!movies || movies.length === 0) return null
+
+	if (isSearchPerformed && movies.length === 0) return <MoviesNotFound />
+
+	if (navigation.state === 'loading') {
+		return <Loader />
+	}
 
 	return (
-		<div className={styles['movie-list']}>
-			{MOVIE_LIST.map((movie) => (
-				<MovieCard
-					key={movie.id}
-					id={movie.id}
-					title={movie.title}
-					rating={movie.rating}
-					cover={movie.cover}
-				/>
-			))}
-		</div>
+		<section>
+			<div className={styles['movie-list']}>
+				{movies.map((movie) => (
+					<MovieCard
+						key={movie['#IMDB_ID']}
+						id={movie['#IMDB_ID']}
+						title={movie['#TITLE']}
+						rating={movie['#RANK'] || 0}
+						cover={movie['#IMG_POSTER']}
+					/>
+				))}
+			</div>
+		</section>
 	)
 }
 

@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import FavoriteButton from '../FavoriteButton/FavoriteButton'
-import type { movieList } from '../MovieList/MovieList.props'
 import styles from './MovieCard.module.css'
+import type { MovieProps } from '../../interfaces/movie-search.interface'
+import { memo } from 'react'
 
-function MovieCard({ ...props }: movieList) {
+function MovieCard({ ...props }: MovieProps) {
 	return (
 		<Link to={`/movie/${props.id}`} className={styles['movie-card']}>
 			<div className={styles['wrapper']}>
@@ -17,7 +18,7 @@ function MovieCard({ ...props }: movieList) {
 				</span>
 				<div className={styles['card-cover']}>
 					<img
-						src={'/movie-covers/' + props.cover + '.png'}
+						src={props.cover ? props.cover : undefined}
 						alt='Обложка фильма'
 					/>
 				</div>
@@ -31,4 +32,4 @@ function MovieCard({ ...props }: movieList) {
 		</Link>
 	)
 }
-export default MovieCard
+export default memo(MovieCard)

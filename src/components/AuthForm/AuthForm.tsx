@@ -12,12 +12,14 @@ import Input from '../Input/Input'
 import styles from './AuthForm.module.css'
 import { useUser } from '../../hooks/use-user.hook'
 import Heading from '../Heading/Heading'
+import { useNavigate } from 'react-router-dom'
 
 function AuthForm() {
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
 	const { isValid, values, isFormReadyToSubmit } = formState
 	const nameRef = useRef<HTMLInputElement>(null)
 	const { handleLogin } = useUser()
+	const navigate = useNavigate()
 
 	const focusError = (isValid: InitialStateProps['isValid']) => {
 		if (!isValid.name) {
@@ -58,6 +60,8 @@ function AuthForm() {
 	const authRequest = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		dispatchForm({ type: 'SUBMIT' })
+		localStorage.setItem('authToken', Date.now().toString())
+		navigate('/')
 	}
 
 	return (

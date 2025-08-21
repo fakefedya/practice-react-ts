@@ -1,17 +1,13 @@
 import MovieList from '../../components/MovieList/MovieList'
-import MovieSearch from '../../components/MovieSearch/MovieSearch'
+import Search from '../../components/Search/Search'
 
-function Home() {
+function MovieSearch() {
 	return (
 		<>
-			<section>
-				<MovieSearch />
-			</section>
-			<section>
-				<MovieList />
-			</section>
+			<Search />
+			<MovieList />
 		</>
 	)
 }
 
-export default Home
+export default MovieSearch

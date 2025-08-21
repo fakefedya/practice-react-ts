@@ -1,9 +1,20 @@
-import { useParams } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
+import Heading from '../../components/Heading/Heading'
+import Paragraph from '../../components/Paragraph/Paragraph'
+import styles from './movie.module.css'
+import type { LoaderMovieDetailsProps } from '../../interfaces/loader.interface'
 
-function Movie() {
-	const { id } = useParams()
+export function Movie() {
+	const { movie } = useLoaderData() as LoaderMovieDetailsProps
 
-	return <section>Movie ID = {id}</section>
+	return (
+		<section className={styles['hero-section']}>
+			<div className={styles['hero-container']}>
+				<Paragraph appearance='small'>Поиск фильмов</Paragraph>
+				<Heading appearance='medium'>{movie.name}</Heading>
+			</div>
+		</section>
+	)
 }
 
 export default Movie

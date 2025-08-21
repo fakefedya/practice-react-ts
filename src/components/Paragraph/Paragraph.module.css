@@ -3,9 +3,14 @@
 	font-weight: 400;
 	line-height: 24px;
 	color: var(--text-secondary-color);
+	margin: 0;
 }
 
 .small {
+	font-size: 12px;
+}
+
+.normal {
 	font-size: 16px;
 }
 
