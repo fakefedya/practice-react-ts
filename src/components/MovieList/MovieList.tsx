@@ -4,7 +4,6 @@ import MoviesNotFound from '../MoviesNotFound/MoviesNotFound'
 import { useLoaderData, useNavigation } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import type { LoaderMovieSearchProps } from '../../interfaces/loader.interface'
-import { memo } from 'react'
 
 function MovieList() {
 	const { movies, isSearchPerformed } =
@@ -36,4 +35,4 @@ function MovieList() {
 	)
 }
 
-export default memo(MovieList)
+export default MovieList

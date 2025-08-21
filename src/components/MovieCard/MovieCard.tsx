@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import FavoriteButton from '../FavoriteButton/FavoriteButton'
 import styles from './MovieCard.module.css'
 import type { MovieProps } from '../../interfaces/movie-search.interface'
+import { memo } from 'react'
 
 function MovieCard({ ...props }: MovieProps) {
 	return (
@@ -31,4 +32,4 @@ function MovieCard({ ...props }: MovieProps) {
 		</Link>
 	)
 }
-export default MovieCard
+export default memo(MovieCard)
