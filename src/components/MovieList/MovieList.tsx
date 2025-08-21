@@ -3,27 +3,15 @@ import MovieCard from '../MovieCard/MovieCard'
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound'
 import { useLoaderData, useNavigation } from 'react-router-dom'
 import Loader from '../Loader/Loader'
-import { useMemo } from 'react'
 import type { LoaderMovieSearchProps } from '../../interfaces/loader.interface'
+import { memo } from 'react'
 
 function MovieList() {
 	const { movies, isSearchPerformed } =
 		useLoaderData() as LoaderMovieSearchProps
 	const navigation = useNavigation()
 
-	const movieCards = useMemo(() => {
-		if (!movies || movies.length === 0) return null
-
-		return movies.map((movie) => (
-			<MovieCard
-				key={movie['#IMDB_ID']}
-				id={movie['#IMDB_ID']}
-				title={movie['#TITLE']}
-				rating={movie['#RANK'] || 0}
-				cover={movie['#IMG_POSTER']}
-			/>
-		))
-	}, [movies])
+	if (!movies || movies.length === 0) return null
 
 	if (isSearchPerformed && movies.length === 0) return <MoviesNotFound />
 
@@ -33,9 +21,19 @@ function MovieList() {
 
 	return (
 		<section>
-			<div className={styles['movie-list']}>{movieCards}</div>
+			<div className={styles['movie-list']}>
+				{movies.map((movie) => (
+					<MovieCard
+						key={movie['#IMDB_ID']}
+						id={movie['#IMDB_ID']}
+						title={movie['#TITLE']}
+						rating={movie['#RANK'] || 0}
+						cover={movie['#IMG_POSTER']}
+					/>
+				))}
+			</div>
 		</section>
 	)
 }
 
-export default MovieList
+export default memo(MovieList)
